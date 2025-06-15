@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR"></html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Define a viewport responsiva para dispositivos móveis -->
+    <meta name="viewpo""rt" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - FORTES ENGENHARIA</title>
+    <!-- Ícones do Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Arquivo de estilos personalizado -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Ícone de voltar para a página inicial -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <!-- Logo da empresa -->
+            <a href="index.html" class="logo-link">
+                <img src="./images/logofortes.png" alt="FORTES ENGENHARIA" class="auth-logo">
+            </a>
+        </div>
+        
+        <div class="auth-content">
+            <h1 class="auth-title">Olá! Acesse a sua conta</h1>
+            <p class="auth-subtitle">Não possui uma conta? <a href="cadastro.html" class="auth-link">Criar aqui</a></p>
+            
+            <!-- Seleção do tipo de usuário -->
+            <div class="user-type-selector">
+                <label class="radio-option">
+                    <input type="radio" name="userType" value="organizacao">
+                    <span class="radio-custom"></span>
+                    Sou Organização
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="userType" value="reciclador" checked>
+                    <span class="radio-custom"></span>
+                    Sou Reciclador/ Cooperativa
+                </label>
+            </div>
+
+            <!-- Formulário de login -->
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha (Digite a sua senha) <span class="required">*</span></label>
+                    <div class="password-field">
+                        <input type="password" id="senha" name="senha" required>
+                        <!-- Botão para mostrar/ocultar senha -->
+                        <button type="button" class="password-toggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <!-- Link para recuperação de senha -->
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn-submit">Entrar</button>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <p>©EcoFortes 2025 - Por um futuro sem desperdício</p>
+        </div>
+    </div>
+
+    <script>
+        // Alterna a visibilidade da senha
+        const passwordToggle = document.querySelector('.password-toggle');
+        const passwordInput = document.getElementById('senha');
+
+        passwordToggle.addEventListener('click', function() {
+            // Troca o tipo do input entre 'password' e 'text'
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Alterna o ícone do olho
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+
+        // Lida com o envio do formulário de login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login realizado com sucesso! Redirecionando...');
+            // Aqui você adicionaria a lógica real de login
+        });
+    </script>
+</body>
+</html>

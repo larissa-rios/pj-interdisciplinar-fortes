@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - FORTES ENGENHARIA</title>
+    <!-- Font Awesome para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Ícone de home para voltar à página inicial -->
+    <a href="index.html" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <!-- Logo da empresa com link para home -->
+            <a href="index.html" class="logo-link">
+                <img src="./images/logofortes.png" alt="FORTES ENGENHARIA" class="auth-logo">
+            </a>
+        </div>
+        
+        <div class="auth-content">
+            <h1 class="auth-title">Olá! Faça o seu cadastro</h1>
+            <p class="auth-subtitle">Já possui uma conta? <a href="entrar.html" class="auth-link">Entrar aqui</a></p>
+            
+            <!-- Seleção do tipo de usuário -->
+            <div class="user-type-selector">
+                <label class="radio-option">
+                    <input type="radio" name="userType" value="organizacao" checked>
+                    <span class="radio-custom"></span>
+                    Sou Organização
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="userType" value="reciclador">
+                    <span class="radio-custom"></span>
+                    Sou Reciclador/ Cooperativa
+                </label>
+            </div>
+
+            <!-- Formulário de cadastro -->
+            <form class="auth-form" id="cadastroForm">
+                <div class="form-group">
+                    <label for="email">E-mail <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome <span class="required">*</span></label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sobrenome">Sobrenome <span class="required">*</span></label>
+                        <input type="text" id="sobrenome" name="sobrenome" required>
+                    </div>
+                </div>
+
+                <!-- Campo que muda conforme o tipo de usuário -->
+                <div class="form-group" id="organizationField">
+                    <label for="nomeOrganizacao">Nome da Organização <span class="required">*</span></label>
+                    <input type="text" id="nomeOrganizacao" name="nomeOrganizacao" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha (no mínimo 6 caracteres) <span class="required">*</span></label>
+                    <input type="password" id="senha" name="senha" minlength="6" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoResiduo">Tipo de Resíduo <span class="required">*</span></label>
+                    <select id="tipoResiduo" name="tipoResiduo" required>
+                        <option value="">Selecione...</option>
+                        <option value="papel">Papel</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="organico">Orgânico</option>
+                        <option value="eletronico">Eletrônico</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Cadastrar</button>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <p>©EcoFortes 2025 - Por um futuro sem desperdício</p>
+        </div>
+    </div>
+
+    <script>
+        // Seletores dos elementos do formulário
+        const radioButtons = document.querySelectorAll('input[name="userType"]');
+        const organizationField = document.getElementById('organizationField');
+        const organizationLabel = organizationField.querySelector('label');
+        const organizationInput = organizationField.querySelector('input');
+        const tipoResiduoSelect = document.getElementById('tipoResiduo');
+
+        // Alterna campos e opções conforme o tipo de usuário selecionado
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'organizacao') {
+                    // Configurações para Organização
+                    organizationLabel.textContent = 'Nome da Organização ';
+                    organizationInput.name = 'nomeOrganizacao';
+                    organizationInput.placeholder = '';
+                    
+                    // Opções de resíduos para organização
+                    tipoResiduoSelect.innerHTML = `
+                        <option value="">Selecione...</option>
+                        <option value="papel">Papel</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="organico">Orgânico</option>
+                        <option value="eletronico">Eletrônico</option>
+                        <option value="outros">Outros</option>
+                    `;
+                } else {
+                    // Configurações para Reciclador/Cooperativa
+                    organizationLabel.textContent = 'Nome da Cooperativa ';
+                    organizationInput.name = 'nomeCooperativa';
+                    organizationInput.placeholder = '';
+                    
+                    // Opções de resíduos para reciclador
+                    tipoResiduoSelect.innerHTML = `
+                        <option value="">Eu reciclo/coleto...</option>
+                        <option value="papel">Papel</option>
+                        <option value="plastico">Plástico</option>
+                        <option value="vidro">Vidro</option>
+                        <option value="metal">Metal</option>
+                        <option value="organico">Orgânico</option>
+                        <option value="eletronico">Eletrônico</option>
+                        <option value="todos">Todos os tipos</option>
+                    `;
+                }
+                // Adiciona o asterisco de campo obrigatório
+                organizationLabel.innerHTML += '<span class="required">*</span>';
+            });
+        });
+
+        // Manipula o envio do formulário
+        document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita o envio padrão do formulário
+            alert('Cadastro realizado com sucesso! Redirecionando...');
+            // Aqui pode ser adicionado o redirecionamento ou integração com backend
+        });
+    </script>
+</body>
+</html>

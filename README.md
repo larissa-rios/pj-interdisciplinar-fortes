@@ -49,7 +49,7 @@ O **protótipo de alta fidelidade foi desenvolvido no Figma** e contempla todas 
 
 ## 👩‍💻 Desenvolvido por
 
-**Lari**  
+**Larissa Rios**  
 Estudante de Ciência da Computação – 1º período  
 Universidade Vila Velha (UVV)
 
